@@ -5,7 +5,7 @@
 
 template<typename T>
 class TPQueue {
-   public:
+ public:
   TPQueue() : first(nullptr) {}
 
   ~TPQueue() {
