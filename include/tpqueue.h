@@ -9,12 +9,12 @@ class TPQueue {
   TPQueue() : first(nullptr) {}
 
   ~TPQueue() {
-    while (!isClear()) {
-      remove();
+    while (!isEmpty()) {
+      pop();
     }
   }
 
-  void insert(const T& element) {
+  void push(const T& element) {
     Cell* newCell = new Cell(element);
     if (!first || element.prior > first->value.prior) {
       newCell->next = first;
@@ -29,21 +29,21 @@ class TPQueue {
     }
   }
 
-  T remove() {
+  T pop() {
     if (!first) throw std::runtime_error("Очередь пуста");
-    Cell* oldFirst = first;
-    T outVal = oldFirst->value;
+    Cell* temp = first;
+    T out = temp->value;
     first = first->next;
-    delete oldFirst;
-    return outVal;
+    delete temp;
+    return out;
   }
 
-  const T& peek() const {
+  const T& front() const {
     if (!first) throw std::runtime_error("Очередь пуста");
     return first->value;
   }
 
-  bool isClear() const {
+  bool isEmpty() const {
     return first == nullptr;
   }
 
